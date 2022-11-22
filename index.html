@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React [RU] Tutorial v2</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      h2 {
+        font-size: 15px;
+        margin: 15px 0;
+        color: gray;
+        text-align: right;
+      }
+
+      p {
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .main {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: #9139b5;
+      }
+
+      #quote-box {
+        width: 450px;
+        padding: 40px;
+        border-radius: 10px;
+        background-color: #ffffff;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .main .button,
+      #tweet-quote {
+        background-color: #9139b5;
+        border-color: #9139b5;
+        display: inline-blick;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #ffffff;
+      }
+
+      #tweet-quote {
+        margin-left: 15px;
+        padding: 7px 10px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      const quoteData = [
+        {
+          text: "Genius is one percent inspiration and ninety-nine percent perspiration.",
+          author: "Thomas Edison",
+        },
+        {
+          text: "You can observe a lot just by watching.",
+          author: "Yogi Berra",
+        },
+        {
+          text: "A house divided against itself cannot stand.",
+          author: "Abraham Lincoln",
+        },
+        {
+          text: "Difficulties increase the nearer we get to the goal.",
+          author: "Johann Wolfgang von Goethe",
+        },
+        {
+          text: "Fate is in your hands and no one elses",
+          author: "Byron Pulsifer",
+        },
+        {
+          text: "Be the chief but never the lord.",
+          author: "Lao Tzu",
+        },
+        {
+          text: "Nothing happens unless first we dream.",
+          author: "Carl Sandburg",
+        },
+        {
+          text: "Well begun is half done.",
+          author: "Aristotle",
+        },
+        {
+          text: "Life is a learning experience, only if you learn.",
+          author: "Yogi Berra",
+        },
+      ];
+
+      const QuoteBox = ({ quote, handleNewquote }) => (
+        <div id="quote-box">
+          <p id="text">{quote.text}</p>
+          <h2 id="author">-{quote.author}</h2>
+          <div className="actions">
+            <button id="new-quote" className="button" onClick={handleNewquote}>
+              New Quote
+            </button>
+
+            <a
+              href="https://twitter.com/intent/tweet"
+              id="tweet-quote"
+              target="_blank"
+            >
+              Tweet
+            </a>
+          </div>
+        </div>
+      );
+
+      const getRandomIndex = () =>
+        Math.round(Math.random() * (quoteData.length - 1 - 0) + 0);
+
+      const App = () => {
+        const [quote, setQuote] = React.useState(quoteData[getRandomIndex()]);
+
+        const handleNewquote = () => {
+          setQuote(quoteData[getRandomIndex()]);
+        };
+
+        return (
+          <div className="main">
+            <QuoteBox quote={quote} handleNewquote={handleNewquote} />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>
